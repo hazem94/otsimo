@@ -18,7 +18,7 @@ export default function GameOver({ restart }) {
                   </CardHeader>
                   <CardBody>
                     <CardText>
-                      <CardImg src="/assets/gameover.jpg" alt="gameover"/>
+                      <CardImg src="/assets/gameover.jpg" alt="gameover" height="400px"/>
                     </CardText>
                     <Button color="danger" outline onClick={restart}>Try Again</Button>
                   </CardBody>
