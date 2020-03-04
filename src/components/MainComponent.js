@@ -7,6 +7,7 @@ import Question from "./QuestionComponent";
 import Axios from "axios";
 import CorrectAnswer from "./CorrectAnswerComponent";
 import GameOver from "./GameOverComponent";
+import Winner from "./WinnerComponent";
 
 class MainComponent extends Component {
   constructor(props) {
@@ -60,8 +61,14 @@ class MainComponent extends Component {
   };
 
   onNext = () => {
-    this.setState({ currentQuestionId: this.state.currentQuestionId + 1 });
-    this.props.history.push("/questions");
+    const counter = this.state.currentQuestionId + 1;
+    // handle if all questions are answered correctly
+    if (counter >= this.state.totalQuestionsCount) {
+      this.props.history.push("/winner")
+    } else {
+      this.setState({ currentQuestionId: counter });
+      this.props.history.push("/questions");
+    }
   };
 
   restart = () => {
@@ -113,6 +120,10 @@ class MainComponent extends Component {
     return <GameOver restart={this.restart} />;
   };
 
+  winnerPage = () => {
+    return <Winner restart={this.restart} />
+  }
+
   render() {
     return (
       <Switch>
@@ -120,6 +131,7 @@ class MainComponent extends Component {
         <Route path="/questions" component={this.questionPage} />
         <Route path="/correctAnswer" component={this.correctAnswerPage} />
         <Route path="/gameOver" component={this.gameOverPage} />
+        <Route path="/winner" component={this.winnerPage} />
         <Redirect to="/" />
       </Switch>
     );

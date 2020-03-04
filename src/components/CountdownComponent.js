@@ -2,9 +2,11 @@
 
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 
 class Countdown extends Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
     this.state = { remainingTime: 0 }; // in seconds
@@ -21,12 +23,17 @@ class Countdown extends Component {
   };
 
   componentDidMount() {
+    this._isMounted = true;
     this.setState({ remainingTime: this.props.remainingTime });
     this.interval = setInterval(() => this.tick(), 1000);
   }
 
   UNSAFE_componentWillMount() {
     clearInterval(this.interval);
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   render() {
