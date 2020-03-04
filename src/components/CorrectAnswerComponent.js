@@ -3,6 +3,7 @@
 import React from "react";
 import { Spring } from "react-spring/renderprops";
 import { Container, Row, Col, Button, Card, CardHeader, CardBody, CardText } from "reactstrap";
+import PropTypes from "prop-types";
 
 export default function CorrectAnswer({ currentQuestionId, totalQuestionsCount, onNext }) {
   // if questions not set yet, return
@@ -36,3 +37,10 @@ export default function CorrectAnswer({ currentQuestionId, totalQuestionsCount, 
     </Spring>
   );
 }
+
+// propTypes
+CorrectAnswer.propTypes = {
+  currentQuestionId: PropTypes.number,
+  totalQuestionsCount: PropTypes.number,
+  onNext: PropTypes.func
+};

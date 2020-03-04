@@ -3,6 +3,7 @@
 import React from "react";
 import { Spring } from "react-spring/renderprops";
 import {Container, Col, Row, Card, CardHeader, CardBody, CardText, Button, CardImg} from "reactstrap";
+import PropTypes from "prop-types"
 
 export default function GameOver({ restart }) {
   return (
@@ -30,4 +31,9 @@ export default function GameOver({ restart }) {
       )}
     </Spring>
   );
+}
+
+// PropTypes
+GameOver.propTypes = {
+  restart: PropTypes.func
 }

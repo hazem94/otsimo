@@ -3,6 +3,8 @@
 import React from "react";
 import { Card, CardHeader, CardBody, CardText, Container, Row, Col, FormGroup, Button, Form } from "reactstrap";
 import { Spring } from "react-spring/renderprops";
+import Countdown from "./CountdownComponent";
+import PropTypes from "prop-types";
 
 /**
  * Shuffles array in place. ES6 version
@@ -16,7 +18,7 @@ const shuffle = a => {
   return a;
 };
 
-export default function Question({ question, totalQuestionsCount, currentQuestionId, handleAnswer, gameOverPage }) {
+export default function Question({ question, totalQuestionsCount, currentQuestionId, handleAnswer }) {
   if (!question) return <></>;
   const incorrectAnswers = question.incorrect_answers;
   const correctAnswer = [question.correct_answer];
@@ -38,8 +40,14 @@ export default function Question({ question, totalQuestionsCount, currentQuestio
               <Col>
                 <Card>
                   <CardHeader className="bg-dark text-light">
-                    Question {parseInt(currentQuestionId) + 1} /{" "}
-                    {totalQuestionsCount}
+                    <div className="d-flex">
+                      <div className="p-2">
+                        Question {parseInt(currentQuestionId) + 1} / {totalQuestionsCount}
+                      </div>
+                      <div className="p-2 ml-auto">
+                        <Countdown remainingTime={15} />
+                      </div>
+                    </div>
                   </CardHeader>
                   <CardBody>
                     <CardText>{question.question}</CardText>
@@ -56,3 +64,11 @@ export default function Question({ question, totalQuestionsCount, currentQuestio
     </Spring>
   );
 }
+
+// PropTypes
+Question.propTypes = {
+  question: PropTypes.object,
+  totalQuestionsCount: PropTypes.number,
+  currentQuestionId: PropTypes.number,
+  handleAnswer: PropTypes.func
+};

@@ -1,15 +1,9 @@
+/** @format */
+
 import React from "react";
-import {
-  Form,
-  Container,
-  Col,
-  Row,
-  FormGroup,
-  Button,
-  Input,
-  Label
-} from "reactstrap";
+import { Form, Container, Col, Row, FormGroup, Button, Input, Label } from "reactstrap";
 import { Spring } from "react-spring/renderprops";
+import PropTypes from "prop-types";
 
 const cardStyle = {
   textAlign: "center",
@@ -19,11 +13,7 @@ const cardStyle = {
 
 export default function Welcome({ difficulty, onChange, onSubmit }) {
   return (
-    <Spring
-      from={{ opacity: 0, marginTop: -500 }}
-      to={{ opacity: 1, marginTop: 0 }}
-      config={{ delay: 200, duration: 500 }}
-    >
+    <Spring from={{ opacity: 0, marginTop: -500 }} to={{ opacity: 1, marginTop: 0 }} config={{ delay: 200, duration: 500 }}>
       {props => (
         <div style={props}>
           <Container style={{ marginTop: "10%" }}>
@@ -38,13 +28,7 @@ export default function Welcome({ difficulty, onChange, onSubmit }) {
                   </FormGroup>
                   <FormGroup>
                     <Label htmlFor="difficulty">Select Difficulty Level</Label>
-                    <Input
-                      type="select"
-                      id="difficulty"
-                      name="difficulty"
-                      value={difficulty}
-                      onChange={onChange}
-                    >
+                    <Input type="select" id="difficulty" name="difficulty" value={difficulty} onChange={onChange}>
                       <option value="easy">Easy</option>
                       <option value="medium">Medium</option>
                       <option value="hard">Hard</option>
@@ -64,3 +48,10 @@ export default function Welcome({ difficulty, onChange, onSubmit }) {
     </Spring>
   );
 }
+
+// PropTypes
+Welcome.propTypes = {
+  difficulty: PropTypes.string,
+  onChange: PropTypes.func,
+  onSubmit: PropTypes.func
+};
